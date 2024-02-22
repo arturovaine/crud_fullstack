@@ -12,8 +12,9 @@ datasource db {
 
 model Categoria {
   categoria_id         Int       @id @default(autoincrement())
-  nome_categoria       String?   //@db.VarChar(20)
+  nome_categoria       String?   //@db.Varhar(20) -> mysql,postgresql
   descricao_categoria  String?   //@db.VarChar(200)
+  // Native type VarChar is not supported for sqlite connector.
   produtos             Produto[]
 
   @@map("categoria")
@@ -28,8 +29,8 @@ model Cliente {
   cpf               String      //@unique @db.VarChar(11) 
   telefone          String?     //@db.VarChar(11)
   data_nascimento   DateTime?   
-  endereco_id       Int         
-  pedidos           Pedido[]    
+  endereco_id       Int
+  pedidos           Pedido[]
   Endereco          Endereco    @relation(fields: [endereco_id], references: [endereco_id])
 
   @@map("cliente")
