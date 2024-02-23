@@ -1,7 +1,7 @@
 
 -- TRUNCATE TABLE public.categoria;
 
-INSERT INTO categoria (
+INSERT IGNORE INTO categoria (
 	-- categoria_id,
 	nome_categoria,
 	descricao_categoria
@@ -19,7 +19,7 @@ INSERT INTO categoria (
 
 -- TRUNCATE TABLE public.cliente;
 
-INSERT INTO cliente (
+INSERT IGNORE INTO cliente (
 	-- cliente_id,
 	email,
 	username,
@@ -43,7 +43,7 @@ INSERT INTO cliente (
 
 -- TRUNCATE TABLE public.endereco;
 
-INSERT INTO endereco (
+INSERT IGNORE INTO endereco (
 	-- endereco_id,
 	cep,
 	rua,
@@ -66,7 +66,7 @@ INSERT INTO endereco (
 
 -- TRUNCATE TABLE public.pedido;
 
-INSERT INTO pedido (
+INSERT IGNORE INTO pedido (
 	-- pedido_id,
 	numero_pedido,
 	valor_total_pedido,
@@ -87,7 +87,7 @@ INSERT INTO pedido (
 
 -- TRUNCATE TABLE public.produto;
 
-INSERT INTO produto (
+INSERT IGNORE INTO produto (
 	-- produto_id,
 	nome_produto,
 	descricao_produto,
@@ -110,7 +110,7 @@ INSERT INTO produto (
 
 -- TRUNCATE TABLE public.produto_pedido;
 
-INSERT INTO produto_pedido (
+INSERT IGNORE INTO produto_pedido (
 	-- produto_pedido_id,
 	qtd_produto_pedido,
 	preco_produto_pedido,
