@@ -14,7 +14,7 @@ Implementações/funcionalidades básicas
 - [x] <b>API/backend em Node.js utilizando o framework Fastify;</b>
 - [x] <b>SGBD de qualquer preferência aplicável; MySQL escolhido -> há plugin nativo Fastify</b>
 - [x] <b>Controle de segurança: "rate limit" e jwt para acesso aos endpoints da API (Bearer token);</b>
-- [ ] Swagger implementado para acesso à documentação da API;
+- [x] Swagger implementado para acesso à documentação da API;
 - [x] <b>Arquivo SQL contendo o DDL final e alguns “inserts” de dados de exemplo;</b>
 - [x] <b>Coleção do Postman ou Insomnia, em formato JSON, para testes na API.</b>
 
