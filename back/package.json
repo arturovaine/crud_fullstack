@@ -11,14 +11,24 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemo": "^1.0.0",
     "nodemon": "^3.0.3",
     "prisma": "^5.10.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@fastify/jwt": "^5.0.0",
+    "@fastify/mysql": "^4.2.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/swagger": "^8.14.0",
     "@prisma/client": "^5.10.2",
     "@types/node": "^20.11.19",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
-    "fastify": "^4.26.1"
+    "fastify": "^4.26.1",
+    "fastify-jwt": "^4.2.0",
+    "fastify-rate-limit": "^5.9.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   }
 }

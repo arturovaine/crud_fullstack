@@ -12,11 +12,13 @@
 Implementações/funcionalidades básicas
 - [x] <b>API Rest que permita a realização das operações “CRUD” em todas as entidades;</b>
 - [x] <b>API/backend em Node.js utilizando o framework Fastify;</b>
-- [x] <b>SGBD de qualquer preferência aplicável; MySQL foi escolhido por já possuir plugin nativo Fastify</b>
-- [ ] Controle de segurança?? jwt para acesso aos endpoints da API;
+- [x] <b>SGBD de qualquer preferência aplicável; MySQL escolhido -> há plugin nativo Fastify</b>
+- [x] <b>Controle de segurança: "rate limit" e jwt para acesso aos endpoints da API (Bearer token);</b>
 - [ ] Swagger implementado para acesso à documentação da API;
 - [x] <b>Arquivo SQL contendo o DDL final e alguns “inserts” de dados de exemplo;</b>
-- [ ] Coleção do Postman ou Insomnia, em formato JSON, para testes na API.
+- [x] <b>Coleção do Postman ou Insomnia, em formato JSON, para testes na API.</b>
+
+> Login "Superuser" -> "username": "client01", "password": "senha01"
 
 Adicionais
 - [ ] Controllers (responsabilidade sobre requisição e resposta)
@@ -28,6 +30,8 @@ Adicionais
 - [ ] TypeScript
 - [ ] Docker
 - [ ] Testes (unitários, integração)
+
+> npm install && node ./back/src/index.js
 
 ### Front-end
 

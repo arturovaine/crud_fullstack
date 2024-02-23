@@ -4,9 +4,74 @@
 		"name": "crud_fastify",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20107073",
-		"_collection_link": ""
+		"_collection_link": "https://supercampo-integration.postman.co/workspace/Team-Workspace~b29ff362-f3e2-4333-8c35-8b386ca60072/collection/20107073-cde467ee-d101-4233-b226-75d1881949cd?action=share&source=collection_link&creator=20107073"
 	},
 	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"jwtToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"cliente01\",\r\n    \"password\": \"senha01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"jwtToken\", jsonData.token);"
+						]
+					}
+				}
+			]
+		},
 		{
 			"name": "categories",
 			"item": [
@@ -16,12 +81,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/categories",
+							"raw": "localhost:3000/api/categories",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"categories"
 							]
 						}
@@ -31,20 +97,89 @@
 				{
 					"name": "Get all",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/categories",
+							"raw": "localhost:3000/api/categories",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"categories"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all / authenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/categories",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-ratelimit-limit",
+									"value": "200"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "198"
+								},
+								{
+									"key": "x-ratelimit-reset",
+									"value": "33"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1452"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 08:15:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoria_id\": 1,\n        \"nome_categoria\": \"Skincare\",\n        \"descricao_categoria\": \"Produtos para cuidados com a pele, incluindo limpeza, hidratação e tratamento.\"\n    },\n    {\n        \"categoria_id\": 2,\n        \"nome_categoria\": \"Maquiagem\",\n        \"descricao_categoria\": \"Produtos para maquiagem, incluindo base, sombra, batom e mais.\"\n    },\n    {\n        \"categoria_id\": 3,\n        \"nome_categoria\": \"Cabelos\",\n        \"descricao_categoria\": \"Produtos para cuidados com os cabelos, incluindo shampoos, condicionadores e tratamentos.\"\n    },\n    {\n        \"categoria_id\": 4,\n        \"nome_categoria\": \"Corpo\",\n        \"descricao_categoria\": \"Produtos para cuidados com o corpo, incluindo sabonetes, hidratantes e esfoliantes.\"\n    },\n    {\n        \"categoria_id\": 5,\n        \"nome_categoria\": \"Perfumaria\",\n        \"descricao_categoria\": \"Perfumes e colônias para todos os gostos e ocasiões.\"\n    },\n    {\n        \"categoria_id\": 6,\n        \"nome_categoria\": \"Acessórios\",\n        \"descricao_categoria\": \"Acessórios para maquiagem e cuidados pessoais, incluindo pincéis e esponjas.\"\n    },\n    {\n        \"categoria_id\": 7,\n        \"nome_categoria\": \"Unhas\",\n        \"descricao_categoria\": \"Esmaltes e tratamentos para unhas.\"\n    },\n    {\n        \"categoria_id\": 8,\n        \"nome_categoria\": \"Solar\",\n        \"descricao_categoria\": \"Protetores solares e produtos para cuidados pós-sol.\"\n    },\n    {\n        \"categoria_id\": 9,\n        \"nome_categoria\": \"Capilar\",\n        \"descricao_categoria\": \"Tratamentos e estilizadores para todos os tipos de cabelo.\"\n    },\n    {\n        \"categoria_id\": 10,\n        \"nome_categoria\": \"Natural\",\n        \"descricao_categoria\": \"Produtos com ingredientes naturais e orgânicos.\"\n    },\n    {\n        \"categoria_id\": 11,\n        \"nome_categoria\": \"Categoria teste2\",\n        \"descricao_categoria\": \"Categoria teste2\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -52,24 +187,77 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/categories/:id",
+							"raw": "localhost:3000/api/categories/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"categories",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/categories/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "153"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:46:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoria_id\": 1,\n        \"nome_categoria\": \"Skincare\",\n        \"descricao_categoria\": \"Produtos para cuidados com a pele, incluindo limpeza, hidratação e tratamento.\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
@@ -77,12 +265,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/categories/:id",
+							"raw": "localhost:3000/api/categories/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"categories",
 								":id"
 							],
@@ -102,12 +291,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/categories/:id",
+							"raw": "localhost:3000/api/categories/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"categories",
 								":id"
 							],
@@ -121,6 +311,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRlX2lkIjoxLCJlbWFpbCI6ImNsaWVudGUwMUBlbWFpbC5jb20iLCJ1c2VybmFtZSI6ImNsaWVudGUwMSIsImNwZiI6IjAwMDAwMDAwMDAxIiwiaWF0IjoxNzA4Njc3MjQ3LCJleHAiOjE3MDg3NjM2NDd9.QD7-frL5k5F9PwFOaL53U9q5qASY0R-4yuGY37kAJlM",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -132,12 +352,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/clients",
+							"raw": "localhost:3000/api/clients",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"clients"
 							]
 						}
@@ -150,17 +371,63 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/clients",
+							"raw": "localhost:3000/api/clients",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"clients"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/clients",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"clients"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2164"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:45:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"cliente_id\": 1,\n        \"email\": \"cliente01@email.com\",\n        \"username\": \"cliente01\",\n        \"senha\": \"senha01\",\n        \"nome\": \"Cliente Um\",\n        \"cpf\": \"00000000001\",\n        \"telefone\": \"11987654321\",\n        \"data_nascimento\": \"1990-01-01T02:00:00.000Z\",\n        \"endereco_id\": 1\n    },\n    {\n        \"cliente_id\": 2,\n        \"email\": \"cliente02@email.com\",\n        \"username\": \"cliente02\",\n        \"senha\": \"senha02\",\n        \"nome\": \"Cliente Dois\",\n        \"cpf\": \"00000000002\",\n        \"telefone\": \"11987654322\",\n        \"data_nascimento\": \"1991-02-02T02:00:00.000Z\",\n        \"endereco_id\": 2\n    },\n    {\n        \"cliente_id\": 3,\n        \"email\": \"cliente03@email.com\",\n        \"username\": \"cliente03\",\n        \"senha\": \"senha03\",\n        \"nome\": \"Cliente Três\",\n        \"cpf\": \"00000000003\",\n        \"telefone\": \"11987654323\",\n        \"data_nascimento\": \"1992-03-03T03:00:00.000Z\",\n        \"endereco_id\": 3\n    },\n    {\n        \"cliente_id\": 4,\n        \"email\": \"cliente04@email.com\",\n        \"username\": \"cliente04\",\n        \"senha\": \"senha04\",\n        \"nome\": \"Cliente Quatro\",\n        \"cpf\": \"00000000004\",\n        \"telefone\": \"11987654324\",\n        \"data_nascimento\": \"1993-04-04T03:00:00.000Z\",\n        \"endereco_id\": 4\n    },\n    {\n        \"cliente_id\": 5,\n        \"email\": \"cliente05@email.com\",\n        \"username\": \"cliente05\",\n        \"senha\": \"senha05\",\n        \"nome\": \"Cliente Cinco\",\n        \"cpf\": \"00000000005\",\n        \"telefone\": \"11987654325\",\n        \"data_nascimento\": \"1994-05-05T03:00:00.000Z\",\n        \"endereco_id\": 5\n    },\n    {\n        \"cliente_id\": 6,\n        \"email\": \"cliente06@email.com\",\n        \"username\": \"cliente06\",\n        \"senha\": \"senha06\",\n        \"nome\": \"Cliente Seis\",\n        \"cpf\": \"00000000006\",\n        \"telefone\": \"11987654326\",\n        \"data_nascimento\": \"1995-06-06T03:00:00.000Z\",\n        \"endereco_id\": 6\n    },\n    {\n        \"cliente_id\": 7,\n        \"email\": \"cliente07@email.com\",\n        \"username\": \"cliente07\",\n        \"senha\": \"senha07\",\n        \"nome\": \"Cliente Sete\",\n        \"cpf\": \"00000000007\",\n        \"telefone\": \"11987654327\",\n        \"data_nascimento\": \"1996-07-07T03:00:00.000Z\",\n        \"endereco_id\": 7\n    },\n    {\n        \"cliente_id\": 8,\n        \"email\": \"cliente08@email.com\",\n        \"username\": \"cliente08\",\n        \"senha\": \"senha08\",\n        \"nome\": \"Cliente Oito\",\n        \"cpf\": \"00000000008\",\n        \"telefone\": \"11987654328\",\n        \"data_nascimento\": \"1997-08-08T03:00:00.000Z\",\n        \"endereco_id\": 8\n    },\n    {\n        \"cliente_id\": 9,\n        \"email\": \"cliente09@email.com\",\n        \"username\": \"cliente09\",\n        \"senha\": \"senha09\",\n        \"nome\": \"Cliente Nove\",\n        \"cpf\": \"00000000009\",\n        \"telefone\": \"11987654329\",\n        \"data_nascimento\": \"1998-09-09T03:00:00.000Z\",\n        \"endereco_id\": 9\n    },\n    {\n        \"cliente_id\": 10,\n        \"email\": \"cliente10@email.com\",\n        \"username\": \"cliente10\",\n        \"senha\": \"senha10\",\n        \"nome\": \"Cliente Dez\",\n        \"cpf\": \"00000000010\",\n        \"telefone\": \"11987654330\",\n        \"data_nascimento\": \"1999-10-10T02:00:00.000Z\",\n        \"endereco_id\": 10\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -168,44 +435,107 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/clients/:id",
+							"raw": "localhost:3000/api/clients/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"clients",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/clients/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"clients",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "215"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:45:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"cliente_id\": 1,\n        \"email\": \"cliente01@email.com\",\n        \"username\": \"cliente01\",\n        \"senha\": \"senha01\",\n        \"nome\": \"Cliente Um\",\n        \"cpf\": \"00000000001\",\n        \"telefone\": \"11987654321\",\n        \"data_nascimento\": \"1990-01-01T02:00:00.000Z\",\n        \"endereco_id\": 1\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"cliente01@email.com\",\r\n    \"username\": \"cliente01\",\r\n    \"senha\": \"$2a$12$mscTAPKRw9Zrf6T/itqHUezXkIL2SR6Oq6nsjxxW5nOutouCBb6G.\",\r\n    \"nome\": \"Cliente Um\",\r\n    \"cpf\": \"00000000001\",\r\n    \"telefone\": \"11987654321\",\r\n    \"data_nascimento\": \"1990-01-01T02:00:00.000Z\",\r\n    \"endereco_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:3000/clients/:id",
+							"raw": "localhost:3000/api/clients/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"clients",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -218,12 +548,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/clients/:id",
+							"raw": "localhost:3000/api/clients/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"clients",
 								":id"
 							],
@@ -248,12 +579,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/addresses",
+							"raw": "localhost:3000/api/addresses",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"addresses"
 							]
 						}
@@ -266,17 +598,63 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/addresses",
+							"raw": "localhost:3000/api/addresses",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"addresses"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/addresses",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"addresses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1457"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:46:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"endereco_id\": 1,\n        \"cep\": \"01000-000\",\n        \"rua\": \"Rua Um\",\n        \"bairro\": \"Bairro Um\",\n        \"cidade\": \"Cidade Um\",\n        \"numero\": \"1\",\n        \"complemento\": \"Apto 1\",\n        \"uf\": \"SP\"\n    },\n    {\n        \"endereco_id\": 2,\n        \"cep\": \"02000-000\",\n        \"rua\": \"Rua Dois\",\n        \"bairro\": \"Bairro Dois\",\n        \"cidade\": \"Cidade Dois\",\n        \"numero\": \"2\",\n        \"complemento\": \"Apto 2\",\n        \"uf\": \"RJ\"\n    },\n    {\n        \"endereco_id\": 3,\n        \"cep\": \"03000-000\",\n        \"rua\": \"Rua Três\",\n        \"bairro\": \"Bairro Três\",\n        \"cidade\": \"Cidade Três\",\n        \"numero\": \"3\",\n        \"complemento\": \"Apto 3\",\n        \"uf\": \"MG\"\n    },\n    {\n        \"endereco_id\": 4,\n        \"cep\": \"04000-000\",\n        \"rua\": \"Rua Quatro\",\n        \"bairro\": \"Bairro Quatro\",\n        \"cidade\": \"Cidade Quatro\",\n        \"numero\": \"4\",\n        \"complemento\": \"Apto 4\",\n        \"uf\": \"ES\"\n    },\n    {\n        \"endereco_id\": 5,\n        \"cep\": \"05000-000\",\n        \"rua\": \"Rua Cinco\",\n        \"bairro\": \"Bairro Cinco\",\n        \"cidade\": \"Cidade Cinco\",\n        \"numero\": \"5\",\n        \"complemento\": \"Apto 5\",\n        \"uf\": \"RS\"\n    },\n    {\n        \"endereco_id\": 6,\n        \"cep\": \"06000-000\",\n        \"rua\": \"Rua Seis\",\n        \"bairro\": \"Bairro Seis\",\n        \"cidade\": \"Cidade Seis\",\n        \"numero\": \"6\",\n        \"complemento\": \"Apto 6\",\n        \"uf\": \"PR\"\n    },\n    {\n        \"endereco_id\": 7,\n        \"cep\": \"07000-000\",\n        \"rua\": \"Rua Sete\",\n        \"bairro\": \"Bairro Sete\",\n        \"cidade\": \"Cidade Sete\",\n        \"numero\": \"7\",\n        \"complemento\": \"Apto 7\",\n        \"uf\": \"SC\"\n    },\n    {\n        \"endereco_id\": 8,\n        \"cep\": \"08000-000\",\n        \"rua\": \"Rua Oito\",\n        \"bairro\": \"Bairro Oito\",\n        \"cidade\": \"Cidade Oito\",\n        \"numero\": \"8\",\n        \"complemento\": \"Apto 8\",\n        \"uf\": \"BA\"\n    },\n    {\n        \"endereco_id\": 9,\n        \"cep\": \"09000-000\",\n        \"rua\": \"Rua Nove\",\n        \"bairro\": \"Bairro Nove\",\n        \"cidade\": \"Cidade Nove\",\n        \"numero\": \"9\",\n        \"complemento\": \"Apto 9\",\n        \"uf\": \"PE\"\n    },\n    {\n        \"endereco_id\": 10,\n        \"cep\": \"10000-000\",\n        \"rua\": \"Rua Dez\",\n        \"bairro\": \"Bairro Dez\",\n        \"cidade\": \"Cidade Dez\",\n        \"numero\": \"10\",\n        \"complemento\": \"Apto 10\",\n        \"uf\": \"CE\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -284,24 +662,77 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/addresses/:id",
+							"raw": "localhost:3000/api/addresses/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"addresses",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/addresses/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"addresses",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "140"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:46:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"endereco_id\": 1,\n        \"cep\": \"01000-000\",\n        \"rua\": \"Rua Um\",\n        \"bairro\": \"Bairro Um\",\n        \"cidade\": \"Cidade Um\",\n        \"numero\": \"1\",\n        \"complemento\": \"Apto 1\",\n        \"uf\": \"SP\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
@@ -309,12 +740,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/addresses/:id",
+							"raw": "localhost:3000/api/addresses/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"addresses",
 								":id"
 							],
@@ -334,12 +766,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/addresses/:id",
+							"raw": "localhost:3000/api/addresses/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"addresses",
 								":id"
 							],
@@ -364,12 +797,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders",
+							"raw": "localhost:3000/api/orders",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders"
 							]
 						}
@@ -382,17 +816,63 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders",
+							"raw": "localhost:3000/api/orders",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/orders",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1294"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:47:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"pedido_id\": 1,\n        \"numero_pedido\": 4001,\n        \"valor_total_pedido\": 100,\n        \"data_pedido\": \"2024-01-01T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 1\n    },\n    {\n        \"pedido_id\": 2,\n        \"numero_pedido\": 4002,\n        \"valor_total_pedido\": 200,\n        \"data_pedido\": \"2024-01-02T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 2\n    },\n    {\n        \"pedido_id\": 3,\n        \"numero_pedido\": 4003,\n        \"valor_total_pedido\": 300,\n        \"data_pedido\": \"2024-01-03T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 3\n    },\n    {\n        \"pedido_id\": 4,\n        \"numero_pedido\": 4004,\n        \"valor_total_pedido\": 400,\n        \"data_pedido\": \"2024-01-04T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 4\n    },\n    {\n        \"pedido_id\": 5,\n        \"numero_pedido\": 4005,\n        \"valor_total_pedido\": 500,\n        \"data_pedido\": \"2024-01-05T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 5\n    },\n    {\n        \"pedido_id\": 6,\n        \"numero_pedido\": 4006,\n        \"valor_total_pedido\": 600,\n        \"data_pedido\": \"2024-01-06T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 6\n    },\n    {\n        \"pedido_id\": 7,\n        \"numero_pedido\": 4007,\n        \"valor_total_pedido\": 700,\n        \"data_pedido\": \"2024-01-07T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 7\n    },\n    {\n        \"pedido_id\": 8,\n        \"numero_pedido\": 4008,\n        \"valor_total_pedido\": 800,\n        \"data_pedido\": \"2024-01-08T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 8\n    },\n    {\n        \"pedido_id\": 9,\n        \"numero_pedido\": 4009,\n        \"valor_total_pedido\": 900,\n        \"data_pedido\": \"2024-01-09T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 9\n    },\n    {\n        \"pedido_id\": 10,\n        \"numero_pedido\": 4010,\n        \"valor_total_pedido\": 1000,\n        \"data_pedido\": \"2024-01-10T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 10\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -400,24 +880,77 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/:id",
+							"raw": "localhost:3000/api/orders/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/orders/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "130"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:47:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"pedido_id\": 1,\n        \"numero_pedido\": 4001,\n        \"valor_total_pedido\": 100,\n        \"data_pedido\": \"2024-01-01T03:00:00.000Z\",\n        \"status\": 1,\n        \"cliente_id\": 1\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
@@ -425,12 +958,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/:id",
+							"raw": "localhost:3000/api/orders/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								":id"
 							],
@@ -450,12 +984,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/:id",
+							"raw": "localhost:3000/api/orders/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								":id"
 							],
@@ -480,12 +1015,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products",
+							"raw": "localhost:3000/api/products",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"products"
 							]
 						}
@@ -498,17 +1034,63 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products",
+							"raw": "localhost:3000/api/products",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"products"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/products",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2888"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:47:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"produto_id\": 1,\n        \"nome_produto\": \"Creme Hidratante Facial\",\n        \"descricao_produto\": \"Creme hidratante para todos os tipos de pele. 50ml\",\n        \"preco_produto\": \"90\",\n        \"qtd_estoque\": 100,\n        \"data_cadastro_produto\": \"2024-01-01T03:00:00.000Z\",\n        \"categoria_id\": 1,\n        \"imagem\": \"creme_hidratante_facial_5001.jpg\"\n    },\n    {\n        \"produto_id\": 2,\n        \"nome_produto\": \"Base Líquida HD\",\n        \"descricao_produto\": \"Base líquida de alta definição para uma cobertura uniforme. 30ml\",\n        \"preco_produto\": \"120\",\n        \"qtd_estoque\": 50,\n        \"data_cadastro_produto\": \"2024-01-02T03:00:00.000Z\",\n        \"categoria_id\": 2,\n        \"imagem\": \"base_liquida_hd_5002.jpg\"\n    },\n    {\n        \"produto_id\": 3,\n        \"nome_produto\": \"Shampoo Hidratante\",\n        \"descricao_produto\": \"Shampoo para cabelos secos e danificados. 300ml\",\n        \"preco_produto\": \"45\",\n        \"qtd_estoque\": 150,\n        \"data_cadastro_produto\": \"2024-01-03T03:00:00.000Z\",\n        \"categoria_id\": 3,\n        \"imagem\": \"shampoo_hidratante_5003.jpg\"\n    },\n    {\n        \"produto_id\": 4,\n        \"nome_produto\": \"Esfoliante Corporal\",\n        \"descricao_produto\": \"Esfoliante para remover células mortas e revitalizar a pele. 200ml\",\n        \"preco_produto\": \"60\",\n        \"qtd_estoque\": 100,\n        \"data_cadastro_produto\": \"2024-01-04T03:00:00.000Z\",\n        \"categoria_id\": 4,\n        \"imagem\": \"esfoliante_corporal_5004.jpg\"\n    },\n    {\n        \"produto_id\": 5,\n        \"nome_produto\": \"Perfume Elegance\",\n        \"descricao_produto\": \"Perfume com notas florais e amadeiradas para o dia e a noite. 50ml\",\n        \"preco_produto\": \"150\",\n        \"qtd_estoque\": 75,\n        \"data_cadastro_produto\": \"2024-01-05T03:00:00.000Z\",\n        \"categoria_id\": 5,\n        \"imagem\": \"perfume_elegance_5005.jpg\"\n    },\n    {\n        \"produto_id\": 6,\n        \"nome_produto\": \"Kit de Pincéis Profissionais\",\n        \"descricao_produto\": \"Conjunto de pincéis para aplicação de maquiagem. Inclui 5 peças\",\n        \"preco_produto\": \"200\",\n        \"qtd_estoque\": 50,\n        \"data_cadastro_produto\": \"2024-01-06T03:00:00.000Z\",\n        \"categoria_id\": 6,\n        \"imagem\": \"kit_pinceis_profissionais_5006.jpg\"\n    },\n    {\n        \"produto_id\": 7,\n        \"nome_produto\": \"Esmalte Longa Duração\",\n        \"descricao_produto\": \"Esmalte com fórmula avançada para maior durabilidade. 10ml\",\n        \"preco_produto\": \"25\",\n        \"qtd_estoque\": 200,\n        \"data_cadastro_produto\": \"2024-01-07T03:00:00.000Z\",\n        \"categoria_id\": 7,\n        \"imagem\": \"esmalte_longa_duracao_5007.jpg\"\n    },\n    {\n        \"produto_id\": 8,\n        \"nome_produto\": \"Protetor Solar FPS 50\",\n        \"descricao_produto\": \"Proteção solar alta para uso diário. Resistente à água. 100ml\",\n        \"preco_produto\": \"90\",\n        \"qtd_estoque\": 120,\n        \"data_cadastro_produto\": \"2024-01-08T03:00:00.000Z\",\n        \"categoria_id\": 8,\n        \"imagem\": \"protetor_solar_fps50_5008.jpg\"\n    },\n    {\n        \"produto_id\": 9,\n        \"nome_produto\": \"Máscara Capilar Reconstrutora\",\n        \"descricao_produto\": \"Tratamento intensivo para cabelos danificados. 250ml\",\n        \"preco_produto\": \"75\",\n        \"qtd_estoque\": 80,\n        \"data_cadastro_produto\": \"2024-01-09T03:00:00.000Z\",\n        \"categoria_id\": 9,\n        \"imagem\": \"mascara_capilar_reconstrutora_5009.jpg\"\n    },\n    {\n        \"produto_id\": 10,\n        \"nome_produto\": \"Sabonete Facial Natural\",\n        \"descricao_produto\": \"Sabonete líquido facial com ingredientes naturais. 150ml\",\n        \"preco_produto\": \"55\",\n        \"qtd_estoque\": 100,\n        \"data_cadastro_produto\": \"2024-01-10T03:00:00.000Z\",\n        \"categoria_id\": 10,\n        \"imagem\": \"sabonete_facial_natural_5010.jpg\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -516,24 +1098,77 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products/:id",
+							"raw": "localhost:3000/api/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"products",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/products/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "283"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:48:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"produto_id\": 1,\n        \"nome_produto\": \"Creme Hidratante Facial\",\n        \"descricao_produto\": \"Creme hidratante para todos os tipos de pele. 50ml\",\n        \"preco_produto\": \"90\",\n        \"qtd_estoque\": 100,\n        \"data_cadastro_produto\": \"2024-01-01T03:00:00.000Z\",\n        \"categoria_id\": 1,\n        \"imagem\": \"creme_hidratante_facial_5001.jpg\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
@@ -541,12 +1176,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products/:id",
+							"raw": "localhost:3000/api/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"products",
 								":id"
 							],
@@ -566,12 +1202,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products/:id",
+							"raw": "localhost:3000/api/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"products",
 								":id"
 							],
@@ -596,12 +1233,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/products",
+							"raw": "localhost:3000/api/orders/products",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								"products"
 							]
@@ -615,18 +1253,65 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/products",
+							"raw": "localhost:3000/api/orders/products",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								"products"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/orders/products",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orders",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1075"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:48:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"produto_pedido_id\": 1,\n        \"qtd_produto_pedido\": 1,\n        \"preco_produto_pedido\": \"10\",\n        \"produto_id\": 5001,\n        \"pedido_id\": 1\n    },\n    {\n        \"produto_pedido_id\": 2,\n        \"qtd_produto_pedido\": 2,\n        \"preco_produto_pedido\": \"20\",\n        \"produto_id\": 5002,\n        \"pedido_id\": 2\n    },\n    {\n        \"produto_pedido_id\": 3,\n        \"qtd_produto_pedido\": 3,\n        \"preco_produto_pedido\": \"30\",\n        \"produto_id\": 5003,\n        \"pedido_id\": 3\n    },\n    {\n        \"produto_pedido_id\": 4,\n        \"qtd_produto_pedido\": 4,\n        \"preco_produto_pedido\": \"40\",\n        \"produto_id\": 5004,\n        \"pedido_id\": 4\n    },\n    {\n        \"produto_pedido_id\": 5,\n        \"qtd_produto_pedido\": 5,\n        \"preco_produto_pedido\": \"50\",\n        \"produto_id\": 5005,\n        \"pedido_id\": 5\n    },\n    {\n        \"produto_pedido_id\": 6,\n        \"qtd_produto_pedido\": 6,\n        \"preco_produto_pedido\": \"60\",\n        \"produto_id\": 5006,\n        \"pedido_id\": 6\n    },\n    {\n        \"produto_pedido_id\": 7,\n        \"qtd_produto_pedido\": 7,\n        \"preco_produto_pedido\": \"70\",\n        \"produto_id\": 5007,\n        \"pedido_id\": 7\n    },\n    {\n        \"produto_pedido_id\": 8,\n        \"qtd_produto_pedido\": 8,\n        \"preco_produto_pedido\": \"80\",\n        \"produto_id\": 5008,\n        \"pedido_id\": 8\n    },\n    {\n        \"produto_pedido_id\": 9,\n        \"qtd_produto_pedido\": 9,\n        \"preco_produto_pedido\": \"90\",\n        \"produto_id\": 5009,\n        \"pedido_id\": 9\n    },\n    {\n        \"produto_pedido_id\": 10,\n        \"qtd_produto_pedido\": 10,\n        \"preco_produto_pedido\": \"100\",\n        \"produto_id\": 5010,\n        \"pedido_id\": 10\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get by id",
@@ -634,12 +1319,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/products/:id",
+							"raw": "localhost:3000/api/orders/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								"products",
 								":id"
@@ -652,7 +1338,60 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/orders/products/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orders",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Feb 2024 06:48:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=72"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
 				},
 				{
 					"name": "Update by id",
@@ -660,12 +1399,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/products/:id",
+							"raw": "localhost:3000/api/orders/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								"products",
 								":id"
@@ -686,12 +1426,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/orders/products/:id",
+							"raw": "localhost:3000/api/orders/products/:id",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"api",
 								"orders",
 								"products",
 								":id"
