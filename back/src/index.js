@@ -12,10 +12,13 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
 
 import swagger from '@fastify/swagger';
+//import fastifySwagger from 'fastify-swagger';
 import routes from './routes/index.js';
 
 const app = fastify({ logger: true });
 
+await app.register(import('@fastify/swagger'))
+await app.register(import('@fastify/swagger-ui'))
 await app.register(import('@fastify/rate-limit'), { max: 200, timeWindow: '1 minute' })
 app.register(jwt, { secret: 'TOPSECRET' });
 app.register(authPlugin);
@@ -65,51 +68,22 @@ app.register(routes.categoriesRoutes, { prefix: '/api/categories' })
 app.register(routes.clientsRoutes, { prefix: '/api/clients' })
 app.register(routes.addressesRoutes, { prefix: '/api/addresses' })
 app.register(routes.ordersRoutes, { prefix: '/api/orders' })
-/app.register(routes.productsRoutes, { prefix: '/api/products' })
+app.register(routes.productsRoutes, { prefix: '/api/products' })
 app.register(routes.ordersProductsRoutes, { prefix: '/api/orders/products' })
 
+/*
 app.register(swagger, {
   exposeRoute: true,
   routePrefix: '/documentation',
   swagger: {
     info: {
-      title: 'Test API',
-      description: 'Testing the Fastify swagger API',
-      version: '0.1.0'
-    },
-    externalDocs: {
-      url: 'https://swagger.io',
-      description: 'Find more info here'
-    },
-    host: 'localhost',
-    schemes: ['http'],
-    consumes: ['application/json'],
-    produces: ['application/json'],
-    tags: [
-      { name: 'user', description: 'User related end-points' },
-      { name: 'code', description: 'Code related end-points' }
-    ],
-    definitions: {
-      User: {
-        type: 'object',
-        required: ['id', 'email'],
-        properties: {
-          id: { type: 'string', format: 'uuid' },
-          firstName: { type: 'string' },
-          lastName: { type: 'string' },
-          email: {type: 'string', format: 'email' }
-        }
-      }
-    },
-    securityDefinitions: {
-      apiKey: {
-        type: 'apiKey',
-        name: 'apiKey',
-        in: 'header'
-      }
+      title: 'API de Exemplo',
+      description: 'Documentação da API de Exemplo',
+      version: '1.0.0'
     }
   }
 });
+*/
 
 app.get('/', async (request, reply) => {
   return { hello: 'world' };

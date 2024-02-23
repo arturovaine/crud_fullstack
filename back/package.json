@@ -21,6 +21,7 @@
     "@fastify/mysql": "^4.2.0",
     "@fastify/rate-limit": "^9.1.0",
     "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.10.2",
     "@types/node": "^20.11.19",
     "bcrypt": "^5.1.1",
