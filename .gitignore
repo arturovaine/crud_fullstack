@@ -1,3 +1,5 @@
 back/node_modules
+back/.env
 front/node_modules
+front/.env
 fullstack.pdf

@@ -1,5 +1,5 @@
 
-import Fastify, { FastifyInstance, FastifyRequest, FastifyReply, errorCodes } from 'fastify';
+import Fastify from 'fastify';
 
 import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
