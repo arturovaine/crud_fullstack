@@ -8,6 +8,8 @@ const app = fastify({ logger: true });
 
 export async function ordersRoutes(app, _options) {
 
+  app.addHook('preValidation', app.authenticate);
+
   app.post('/', async (request, reply) => {
     const {
         numero_pedido,

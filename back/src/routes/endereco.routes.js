@@ -8,6 +8,8 @@ const app = fastify({ logger: true });
 
 export async function addressesRoutes(app, _options) {
 
+  app.addHook('preValidation', app.authenticate);
+
   app.post('/', async (request, reply) => {
     const { cep,
         rua,

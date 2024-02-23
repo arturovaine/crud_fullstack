@@ -4,11 +4,11 @@ import fastify from 'fastify';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
 
-// import * as controllers from '../controllers/categoria.controller.js';
-
 const app = fastify({ logger: true });
 
 export async function categoriesRoutes(app, _options) {
+
+  app.addHook('preValidation', app.authenticate);
 
   app.post('/', async (request, reply) => {
     const { nome_categoria, descricao_categoria } = request.body;

@@ -8,6 +8,8 @@ const app = fastify({ logger: true });
 
 export async function clientsRoutes(app, _options) {
 
+  app.addHook('preValidation', app.authenticate);
+
   app.post('/', async (request, reply) => {
     const { email, username, senha, nome, cpf, telefone, data_nascimento, endereco_id } = request.body;
     try {

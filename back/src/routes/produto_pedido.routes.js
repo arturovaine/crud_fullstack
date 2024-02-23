@@ -7,6 +7,8 @@ dotenv.config({ path: '../.env' });
 const app = fastify({ logger: true });
 
 export async function ordersProductsRoutes(app, _options) {
+  
+  app.addHook('preValidation', app.authenticate);
 
   app.post('/', async (request, reply) => {
     const {
