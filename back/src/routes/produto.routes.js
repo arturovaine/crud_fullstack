@@ -4,19 +4,43 @@ import fastify from 'fastify';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
 
-// import * as controllers from '../controllers/categoria.controller.js';
-
 const app = fastify({ logger: true });
 
-export async function categoriesRoutes(app, _options) {
+export async function productsRoutes(app, _options) {
 
   app.post('/', async (request, reply) => {
-    const { nome_categoria, descricao_categoria } = request.body;
+    const {
+        nome_produto,
+        descricao_produto,
+        preco_produto,
+        qtd_estoque,
+        data_cadastro_produto,
+        categoria_id,
+        imagem  
+    } = request.body;
+    
     try {
       const connection = await app.mysql.getConnection();
       const [rows] = await connection.query(
-        `INSERT INTO categoria ( nome_categoria, descricao_categoria )
-        VALUES ('${nome_categoria}','${descricao_categoria}');`);
+        `INSERT INTO endereco (
+            nome_produto,
+            descricao_produto,
+            preco_produto,
+            qtd_estoque,
+            data_cadastro_produto,
+            categoria_id,
+            imagem            
+        )
+        VALUES (
+            '${nome_produto}'
+            ,'${descricao_produto}'
+            ,'${preco_produto}'
+            ,'${qtd_estoque}'
+            ,'${data_cadastro_produto}',
+            ,'${categoria_id}',
+            ,'${imagem}' 
+        );`
+    );
       connection.release();
       return rows;
     } catch (error) {
@@ -27,7 +51,7 @@ export async function categoriesRoutes(app, _options) {
   app.get('/', async (_request, reply) => {
     try {
       const connection = await app.mysql.getConnection();
-      const [rows] = await connection.query('SELECT * FROM categoria;');
+      const [rows] = await connection.query('SELECT * FROM produto;');
       connection.release();
       return rows;
     } catch (error) {
@@ -39,7 +63,7 @@ export async function categoriesRoutes(app, _options) {
     const { id } = request.params;
     try {
       const connection = await app.mysql.getConnection();
-      const [rows] = await connection.query(`SELECT * FROM categoria WHERE categoria_id = '${id}';`);
+      const [rows] = await connection.query(`SELECT * FROM produto WHERE produto_id = '${id}';`);
       connection.release();
       return rows;
     } catch (error) {
@@ -49,13 +73,19 @@ export async function categoriesRoutes(app, _options) {
 
   app.put('/:id', async (request, reply) => {
     const { id } = request.params;
-    const { nome_categoria, descricao_categoria } = request.body;
+    const { email, username, senha, nome, cpf, telefone, data_nascimento, endereco_id } = request.body;
     try {
       const connection = await app.mysql.getConnection();
       const [rows] = await connection.query(
-        `UPDATE categoria
-        SET nome_categoria = '${nome_categoria}', descricao_categoria = '${descricao_categoria}'
-        WHERE categoria_id = '${id}';`);
+        `UPDATE produto
+        SET nome_produto = '${nome_produto}',
+            descricao_produto = '${descricao_produto}',
+            preco_produto = '${preco_produto}',
+            qtd_estoque = '${qtd_estoque}',
+            data_cadastro_produto = '${data_cadastro_produto}',
+            categoria_id = '${categoria_id}',
+            imagem = '${imagem}',
+        WHERE produto_id = '${id}';`);
       connection.release();
       return rows;
     } catch (error) {
@@ -68,8 +98,8 @@ export async function categoriesRoutes(app, _options) {
     try {
       const connection = await app.mysql.getConnection();
       const [rows] = await connection.query(
-        `DELETE FROM categoria
-        WHERE categoria_id = '${id}';`);
+        `DELETE FROM produto
+        WHERE produto_id = '${id}';`);
       connection.release();
       return rows;
     } catch (error) {
