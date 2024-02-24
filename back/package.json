@@ -17,6 +17,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@fastify/cors": "^8.5.0",
     "@fastify/jwt": "^5.0.0",
     "@fastify/mysql": "^4.2.0",
     "@fastify/rate-limit": "^9.1.0",
