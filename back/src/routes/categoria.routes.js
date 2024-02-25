@@ -39,7 +39,7 @@ export async function categoriesRoutes(app, _options) {
     const { id } = request.params;
     try {
       const connection = await app.mysql.getConnection();
-      const [rows] = await connection.query(`SELECT * FROM categoria WHERE categoria_id = '${id}';`);
+      const [rows] = await connection.query(`SELECT * FROM categoria WHERE categoria_id = ?;`,[id]);
       connection.release();
       return rows;
     } catch (error) {

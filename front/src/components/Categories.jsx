@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import '../index.css';
 
-const ContentTable = () => {
+const Categories = () => {
   const [categories, setCategories] = useState([]);
+
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -12,10 +14,9 @@ const ContentTable = () => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ username, password }),
+        }
       };
-      const response = await fetch('http://localhost:3000/categories',options);
+      const response = await fetch('http://localhost:3000/api/categories', options);
       const data = await response.json();
       setCategories(data);
     };
@@ -28,6 +29,9 @@ const ContentTable = () => {
       <table className="table-content">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
+          <th scope="col" className="py-3 px-6">
+              Categoria ID
+            </th>
             <th scope="col" className="py-3 px-6">
               Categoria ID
             </th>
@@ -56,7 +60,7 @@ const ContentTable = () => {
         </tbody>
       </table>
     </div>
-  );
+  )
 };
 
-export default ContentTable;
+export default Categories;

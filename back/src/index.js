@@ -23,7 +23,6 @@ app.register(jwt, { secret: 'TOPSECRET' });
 app.register(authPlugin);
 app.register(fastifyMySQL, { promise: true, connectionString: process.env.DATABASE_URL });
 
-
 app.post('/login', async (request, reply) => {
   const { username, password } = request.body;
 
