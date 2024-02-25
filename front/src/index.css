@@ -43,6 +43,28 @@ td {
   /*@apply py-4 px-6 flex justify-start space-x-2 flex-nowrap*/
 }
 
+.editing-text-input {
+  margin-top: 0.25rem; /* mt-1 */
+  display: block; /* block */
+  width: 100%; /* w-full */
+  padding: 0.5rem 0.75rem; /* px-3, py-2 */
+  background-color: white; /* bg-white */
+  border: 1px solid #d1d5db; /* border, border-gray-300 */
+  border-radius: 0.375rem; /* rounded-md */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+  font-size: 0.875rem; /* sm:text-sm, assuming base font-size is 16px */
+}
+
+.editing-text-input::placeholder {
+  color: #9ca3af; /* placeholder-gray-400 */
+}
+
+.editing-text-input:focus {
+  outline: none; /* focus:outline-none */
+  border-color: #4f46e5; /* focus:border-indigo-500 */
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5); /* focus:ring-indigo-500 */
+}
+
 .div-table {
   @apply overflow-x-auto relative shadow-md sm:rounded-lg 
 }

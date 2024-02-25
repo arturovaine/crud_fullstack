@@ -3,6 +3,8 @@ import Login from './pages/Login';
 import ProtectedRoutes from './components/ProtectedRoutes'; 
 import MainContent from './pages/MainContent';
 import AccessNotAuthorized from './pages/AccessNotAuthorized';
+import './index.css';
+import './App.css';
 
 function App() {
 

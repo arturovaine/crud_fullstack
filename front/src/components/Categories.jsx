@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CreateBtn, SaveBtn, EditBtn, DeleteBtn, CancelBtn } from './buttons';
 import '../index.css';
+import '../App.css';
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -125,6 +126,17 @@ const Categories = () => {
     setDeletingId(null); // Cancel deleting
   };
 
+  const cols = {
+    "categories": ["ID","Nome da Categoria", "Descrição"],
+    "clients": ["ID", "E-mail", "Usuário", "Senha", "Nome", "CPF", "Tel.", "Data Nasc.", "End. ID"],
+    "addresses": ["ID", "Rua", "Bairro", "Cidade", "n.º", "Complemento", "UF"],
+    "products": ["ID", "Nome", "Descrição", "Preço", "Qtde", "Cadastro", "Categoria", "Imagem"],
+    "orders": ["ID", "Pedido", "Total (R$)", "Data", "Status", "Cliente"],
+    "ordersProducts": ["ID", "Produto pedido", "Qtde", "Preço", "Produto", "Pedido"],
+  }
+
+  const headerCategories = ["ID","Nome da Categoria", "Descrição"]
+
   return (
     <div className="div-table">
       <table className="table-content">
@@ -133,9 +145,12 @@ const Categories = () => {
             <th scope="col" className="buttons-cell">
               <CreateBtn onClick={handleAddNew} />
             </th>
+            { cols.categories.map(c => <th scope="col" className="py-3 px-6">{c}</th>) }
+            {/*
             <th scope="col" className="py-3 px-6">ID</th>
             <th scope="col" className="py-3 px-6">Nome da Categoria</th>
             <th scope="col" className="py-3 px-6">Descrição</th>
+            */}
           </tr>
         </thead>
         <tbody>
@@ -153,6 +168,7 @@ const Categories = () => {
                 value={newCategory.nome_categoria}
                 onChange={(e) => handleChangeNewCategory(e, 'nome_categoria')}
                 placeholder="Nome da Categoria"
+                className="editing-text-input"
               />
             </td>
             <td>
@@ -161,6 +177,7 @@ const Categories = () => {
                 value={newCategory.descricao_categoria}
                 onChange={(e) => handleChangeNewCategory(e, 'descricao_categoria')}
                 placeholder="Descrição"
+                className="editing-text-input"
               />
             </td>
           </tr>
@@ -197,6 +214,7 @@ const Categories = () => {
                     type="text"
                     value={editedCategory.nome_categoria}
                     onChange={(e) => handleChange(e, 'nome_categoria')}
+                    className="editing-text-input"
                   />
                 ) : (
                   category.nome_categoria
@@ -208,6 +226,7 @@ const Categories = () => {
                     type="text"
                     value={editedCategory.descricao_categoria}
                     onChange={(e) => handleChange(e, 'descricao_categoria')}
+                    className="editing-text-input"
                   />
                 ) : (
                   category.descricao_categoria
