@@ -38,31 +38,36 @@ const Categories = () => {
   const handleAddNew = () => {
     setAddingNew(true);
     setEditingId(null);
-    setDeletingId(null);
-    setEditedCategory({ nome_categoria: '', descricao_categoria: '' });
+    setNewCategory({ nome_categoria: '', descricao_categoria: '' }); // Reset newCategory for a new entry
   };
 
   const handleSaveNew = async () => {
+    if (!addingNew) return;
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(editedCategory),
+      body: JSON.stringify(newCategory),
     };
     await fetch('http://localhost:3000/api/categories', options);
-    fetchCategories(); // Reload data
     setAddingNew(false); // Exit adding mode
-  };
-
-  // Generalizing....
-  const handleChange = (e, field) => {
-    setEditedCategory((prev) => ({ ...prev, [field]: e.target.value }));
+    setNewCategory({ nome_categoria: '', descricao_categoria: '' }); // Reset newCategory state
+    fetchCategories(); // Refresh categories
   };
 
   const handleChangeNewCategory = (e, field) => {
-    setNewCategory((prev) => ({ ...prev, [field]: e.target.value }));
+    setNewCategory(prev => ({ ...prev, [field]: e.target.value }));
+  };
+
+  const handleCancelNew = () => {
+    setAddingNew(false);
+    setNewCategory({ nome_categoria: '', descricao_categoria: '' }); // Reset newCategory state
+  };
+
+  const handleChange = (e, field) => {
+    setEditedCategory((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const handleEdit = (categoria_id) => {
@@ -111,7 +116,6 @@ const Categories = () => {
     }
   };
 
-  // Generalizing reset state
   const handleResetState = (setState) => {
     return () => {
       setState(null);
@@ -120,10 +124,6 @@ const Categories = () => {
 
   const handleCancelEdit = () => {
     setEditingId(null); // Cancel editing
-  };
-
-  const handleCancelSaveNew = () => {
-    setAddingNew(null); // Cancel editing
   };
 
   const handleCancelDelete = () => {
@@ -147,51 +147,32 @@ const Categories = () => {
           </tr>
         </thead>
         <tbody>
-          {addingNew && (
-            <tr>
-              <td>
-              <>
-                  {
-                    addingNew ?
-                      (
-                        <>
-                          <button
-                            onClick={handleCancelSaveNew}
-                          ><IconCancel />
-                          </button>
-                          &nbsp;&nbsp;
-                          <button
-                            onClick={handleSaveNew}
-                          ><IconSave />
-                          </button>
-                        </>
-                      )
-                      : <button
-                        onClick={handleSaveNew}
-                      ><IconSave />
-                      </button>
-                  }
-              </>
-              </td>
-              <td></td>
-              <td>
-                <input
-                  type="text"
-                  value={newCategory.nome_categoria}
-                  onChange={(e) => handleChangeNewCategory(e, 'nome_categoria')}
-                  placeholder="Nome da Categoria"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={newCategory.descricao_categoria}
-                  onChange={(e) => handleChangeNewCategory(e, 'descricao_categoria')}
-                  placeholder="Descrição"
-                />
-              </td>
-            </tr>
-          )}
+        {addingNew && (
+          <tr>
+            <td>
+              <button onClick={handleSaveNew}><IconSave /></button>
+              &nbsp;&nbsp;
+              <button onClick={handleCancelNew}><IconCancel /></button>
+            </td>
+            <td></td>
+            <td>
+              <input
+                type="text"
+                value={newCategory.nome_categoria}
+                onChange={(e) => handleChangeNewCategory(e, 'nome_categoria')}
+                placeholder="Nome da Categoria"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                value={newCategory.descricao_categoria}
+                onChange={(e) => handleChangeNewCategory(e, 'descricao_categoria')}
+                placeholder="Descrição"
+              />
+            </td>
+          </tr>
+        )}
           {categories.map((category) => (
             <tr key={category.categoria_id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <td className="py-4 px-6 flex justify-start space-x-2">
