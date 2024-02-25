@@ -39,8 +39,12 @@ td {
   @apply py-4 px-6
 }
 
+.buttons-cell {
+  /*@apply py-4 px-6 flex justify-start space-x-2 flex-nowrap*/
+}
+
 .div-table {
-  @apply overflow-x-auto relative shadow-md sm:rounded-lg
+  @apply overflow-x-auto relative shadow-md sm:rounded-lg 
 }
 
 a {
@@ -58,7 +62,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+.login-button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -70,12 +74,12 @@ button {
   transition: border-color 0.25s;
 }
 
-button:hover {
+.login-button:hover {
   border-color: #646cff;
 }
 
-button:focus,
-button:focus-visible {
+.login-button:focus,
+.login-button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -87,8 +91,8 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
+  .login-button {
+    background-color: #282d91;
   }
 }
 
@@ -98,11 +102,3 @@ html, body {
   padding: 0;
   background-color: rgb(230, 230, 230);
 }
-
-
-
-
-
-
-
-
