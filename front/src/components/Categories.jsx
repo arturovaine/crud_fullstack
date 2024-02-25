@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-import IconEdit from '../assets/IconPencilEdit';
-import IconDelete from '../assets/IconTrashDelete';
-import IconCancel from '../assets/IconSlashCancel';
-import IconSave from '../assets/IconFloppyDiskSave';
-import IconAddNewOne from '../assets/IconPlusSquare';
+import { CreateBtn, SaveBtn, EditBtn, DeleteBtn, CancelBtn } from './buttons';
 import '../index.css';
 
 const Categories = () => {
@@ -136,10 +131,7 @@ const Categories = () => {
         <thead>
           <tr>
             <th scope="col" className="buttons-cell">
-              <button
-                onClick={handleAddNew}
-              ><IconAddNewOne />
-              </button>
+              <CreateBtn onClick={handleAddNew} />
             </th>
             <th scope="col" className="py-3 px-6">ID</th>
             <th scope="col" className="py-3 px-6">Nome da Categoria</th>
@@ -150,9 +142,9 @@ const Categories = () => {
         {addingNew && (
           <tr>
             <td>
-              <button onClick={handleSaveNew}><IconSave /></button>
+              <SaveBtn onClick={handleSaveNew} />
               &nbsp;&nbsp;
-              <button onClick={handleCancelNew}><IconCancel /></button>
+              <CancelBtn onClick={handleCancelNew} />
             </td>
             <td></td>
             <td>
@@ -177,41 +169,22 @@ const Categories = () => {
             <tr key={category.categoria_id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <td className="py-4 px-6 flex justify-start space-x-2">
                 {editingId === category.categoria_id ? (
-                  //handleCancelEdit
                   <>
-                    <button
-                      onClick={() => handleCancelEdit()}
-                    ><IconCancel />
-                    </button>
+                    <CancelBtn onClick={() => handleCancelEdit()} />
                     &nbsp;&nbsp;
-                    <button
-                      onClick={() => handleSave(category.categoria_id)}
-                    ><IconSave />
-                    </button>
+                    <SaveBtn onClick={() => handleSave(category.categoria_id)} />
                   </>
                 ) : deletingId === category.categoria_id ? (
                   <>
-                    <button
-                      onClick={() => handleDelete(category.categoria_id)}
-                    ><IconDelete />
-                    </button>
+                    <DeleteBtn onClick={() => handleDelete(category.categoria_id)} />
                     &nbsp;&nbsp;
-                    <button
-                      onClick={handleCancelDelete}
-                    ><IconCancel />
-                    </button>
+                    <CancelBtn onClick={handleCancelDelete} />
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={() => handleEdit(category.categoria_id)}
-                    ><IconEdit />
-                    </button>
-                    &nbsp;&nbsp;
-                    <button
-                      onClick={() => handleDelete(category.categoria_id)}
-                    ><IconDelete />
-                    </button>
+                    <EditBtn onClick={() => handleEdit(category.categoria_id)} />
+                    &nbsp;&nbsp; 
+                    <DeleteBtn onClick={() => handleDelete(category.categoria_id)} />
                   </>
                 )}
               </td>
