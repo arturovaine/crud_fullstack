@@ -3,6 +3,10 @@
 
 - Criação de aplicação CRUD Full Stack com base em tabelas com .ddl já definida
 
+### Preview
+
+![alt text](app.gif "App")
+
 ### Requisitos, lista de funcionalidades e aspectos da aplicação
 
 - Aplicação em configuração "monorepo"
@@ -37,7 +41,7 @@ Adicionais
 
 Implementações/funcionalidades básicas
 - [x] Frontend desenvolvido em React;
-- [ ] Front-end permite realizar todas as operações CRUD nas entidades existentes;
+- [x] Front-end permite realizar todas as operações CRUD nas entidades existentes;
 
 Adicionais
 - [ ] Layouts e organização das telas, assim como o eventual uso de componentes/bibliotecas extras, ...
