@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Categories from '../components/Categories';
 import Products from '../components/Products';
+import Clients from '../components/Clients';
 
 const MainContent = () => {
   const [activeTable, setActiveTable] = useState('categories');
@@ -21,6 +22,7 @@ const MainContent = () => {
       <br/>
       {activeTable === 'categories' && <Categories/>}
       {activeTable === 'products' && <Products/>}
+      {activeTable === 'clients' && <Clients/>}
     </div>
   );
 };
