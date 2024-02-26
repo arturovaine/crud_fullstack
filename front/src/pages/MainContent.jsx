@@ -3,6 +3,7 @@ import Categories from '../components/Categories';
 import Products from '../components/Products';
 import Clients from '../components/Clients';
 import Addresses from '../components/Addresses';
+import Orders from '../components/Orders';
 
 const MainContent = () => {
   const [activeTable, setActiveTable] = useState('categories');
@@ -18,13 +19,14 @@ const MainContent = () => {
         <button className="login-button" onClick={() => setActiveTable('clients')}>Clients</button>&nbsp;&nbsp;
         <button className="login-button" onClick={() => setActiveTable('addresses')}>Addresses</button>&nbsp;&nbsp;
         <button className="login-button" onClick={() => setActiveTable('orders')}>Orders</button>&nbsp;&nbsp;
-        <button className="login-button" onClick={() => setActiveTable('ordersProducts')}>Orders_Products</button>
+        <button className="login-button" onClick={() => setActiveTable('ordersProducts')}>Orders Products</button>
       </div>
       <br/>
       {activeTable === 'categories' && <Categories/>}
       {activeTable === 'products' && <Products/>}
       {activeTable === 'clients' && <Clients/>}
       {activeTable === 'addresses' && <Addresses/>}
+      {activeTable === 'orders' && <Orders/>}
     </div>
   );
 };
