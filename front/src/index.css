@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(230, 230, 230);
+}
+
 .form-container {
   @apply flex flex-col p-4 max-w-sm mx-auto mt-10 space-y-4 bg-white shadow-md rounded-lg;
 }
@@ -38,6 +46,10 @@ tr {
 td {
   @apply py-4 px-6
 }
+
+/*
+td -> py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white
+*/
 
 .buttons-cell {
   /*@apply py-4 px-6 flex justify-start space-x-2 flex-nowrap*/
@@ -91,9 +103,9 @@ h1 {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  background-color: #2b36ff;
 }
 
 .login-button:hover {
@@ -116,11 +128,4 @@ h1 {
   .login-button {
     background-color: #282d91;
   }
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(230, 230, 230);
 }

@@ -36,7 +36,7 @@ Adicionais
 ### Front-end
 
 Implementações/funcionalidades básicas
-- [ ] Frontend desenvolvido em React;
+- [x] Frontend desenvolvido em React;
 - [ ] Front-end permite realizar todas as operações CRUD nas entidades existentes;
 
 Adicionais

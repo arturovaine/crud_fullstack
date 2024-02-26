@@ -1,17 +1,39 @@
+
 import React, { useEffect, useState } from 'react';
 import { CreateBtn, SaveBtn, EditBtn, DeleteBtn, CancelBtn } from './buttons';
 import '../index.css';
 import '../App.css';
 
 const Categories = () => {
+  const [data,  setData] = useState([]);
+
   const [categories, setCategories] = useState([]);
   const [editingId, setEditingId] = useState(null);
-  const [deletingId, setDeletingId] = useState(null);
   const [editedCategory, setEditedCategory] = useState({});
+  const [deletingId, setDeletingId] = useState(null);
   const [addingNew, setAddingNew] = useState(false);
   const [newCategory, setNewCategory] = useState({ nome_categoria: '', descricao_categoria: '' });
 
   const token = localStorage.getItem('token');
+
+  const apiRequest = async (method, resource, token, setDataState) => {
+
+    try {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Authorization': `Bearer ${token}`,
+        },
+      };
+      const response = await fetch(`http://localhost:3000/api/${resource}`, options);
+      const data = await response.json();
+      setDataState(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetchCategories = async () => {
     const options = {
@@ -132,10 +154,8 @@ const Categories = () => {
     "addresses": ["ID", "Rua", "Bairro", "Cidade", "n.º", "Complemento", "UF"],
     "products": ["ID", "Nome", "Descrição", "Preço", "Qtde", "Cadastro", "Categoria", "Imagem"],
     "orders": ["ID", "Pedido", "Total (R$)", "Data", "Status", "Cliente"],
-    "ordersProducts": ["ID", "Produto pedido", "Qtde", "Preço", "Produto", "Pedido"],
-  }
-
-  const headerCategories = ["ID","Nome da Categoria", "Descrição"]
+    "ordersProducts": ["ID", "Produto pedido", "Qtde", "Preço", "Produto", "Pedido"]
+  };
 
   return (
     <div className="div-table">
@@ -146,11 +166,6 @@ const Categories = () => {
               <CreateBtn onClick={handleAddNew} />
             </th>
             { cols.categories.map(c => <th scope="col" className="py-3 px-6">{c}</th>) }
-            {/*
-            <th scope="col" className="py-3 px-6">ID</th>
-            <th scope="col" className="py-3 px-6">Nome da Categoria</th>
-            <th scope="col" className="py-3 px-6">Descrição</th>
-            */}
           </tr>
         </thead>
         <tbody>
@@ -161,13 +176,13 @@ const Categories = () => {
               &nbsp;&nbsp;
               <CancelBtn onClick={handleCancelNew} />
             </td>
-            <td></td>
+            <td>{/* ID */}</td>
             <td>
               <input
                 type="text"
                 value={newCategory.nome_categoria}
                 onChange={(e) => handleChangeNewCategory(e, 'nome_categoria')}
-                placeholder="Nome da Categoria"
+                placeholder=""
                 className="editing-text-input"
               />
             </td>
@@ -176,7 +191,7 @@ const Categories = () => {
                 type="text"
                 value={newCategory.descricao_categoria}
                 onChange={(e) => handleChangeNewCategory(e, 'descricao_categoria')}
-                placeholder="Descrição"
+                placeholder=""
                 className="editing-text-input"
               />
             </td>
