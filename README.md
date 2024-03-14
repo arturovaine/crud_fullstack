@@ -1,49 +1,48 @@
+### Context
 
-### Contexto
-
-- Criação de aplicação CRUD Full Stack com base em tabelas com .ddl já definida
+- Creation of a CRUD Full Stack application based on tables with .ddl already defined
 
 ### Preview
 
 ![alt text](app.gif "App")
 
-### Requisitos, lista de funcionalidades e aspectos da aplicação
+### Requirements, list of features and aspects of the application
 
-- Aplicação em configuração "monorepo"
+- Application in "monorepo" configuration
 
-### Back-end
+### Backend
 
-Implementações/funcionalidades básicas
-- [x] <b>API Rest que permita a realização das operações “CRUD” em todas as entidades;</b>
-- [x] <b>API/backend em Node.js utilizando o framework Fastify;</b>
-- [x] <b>SGBD de qualquer preferência aplicável; MySQL escolhido -> há plugin nativo Fastify</b>
-- [x] <b>Controle de segurança: "rate limit" e jwt para acesso aos endpoints da API (Bearer token);</b>
-- [x] Swagger implementado para acesso à documentação da API;
-- [x] <b>Arquivo SQL contendo o DDL final e alguns “inserts” de dados de exemplo;</b>
-- [x] <b>Coleção do Postman ou Insomnia, em formato JSON, para testes na API.</b>
+Basic implementations/functionalities
+- [x] <b>Rest API that allows “CRUD” operations to be carried out on all entities;</b>
+- [x] <b>API/backend in Node.js using the Fastify framework;</b>
+- [x] <b>DBMS of any applicable preference; MySQL chosen -> there is native plugin Fastify</b>
+- [x] <b>Security control: "rate limit" and jwt for access to API endpoints (Bearer token);</b>
+- [x] Swagger implemented for accessing API documentation;
+- [x] <b>SQL file containing the final DDL and some example data inserts;</b>
+- [x] <b>Postman or Insomnia collection, in JSON format, for API testing.</b>
 
-> Login "Superuser" -> "username": "client01", "password": "senha01"
+> Login "Superuser" -> "username": "client01", "password": "password01"
 
-Adicionais
-- [ ] Controllers (responsabilidade sobre requisição e resposta)
-- [ ] Middlewares de erros e validações
-- [ ] Services (regras de negócio)
-- [ ] Models (responsabilidade somente sobre CRUD no banco de dados)
-- [x] <b>Routes (organização de rotas)</b>
-- [ ] Implementação de ORM (Sequelize,TypeORM, Prisma,...)
+Additional
+- [ ] Controllers (responsibility for request and response)
+- [ ] Error and validation middleware
+- [ ] Services (business rules)
+- [ ] Models (responsibility only for CRUD in the database)
+- [x] <b>Routes (route organization)</b>
+- [ ] ORM implementation (Sequelize, TypeORM, Prisma,...)
 - [ ] TypeScript
 - [ ] Docker
-- [ ] Testes (unitários, integração)
+- [ ] Tests (unit, integration)
 
 > npm install && node ./back/src/index.js
 
 ### Front-end
 
-Implementações/funcionalidades básicas
-- [x] Frontend desenvolvido em React;
-- [x] Front-end permite realizar todas as operações CRUD nas entidades existentes;
+Basic implementations/functionalities
+- [x] Frontend developed in React;
+- [x] Front-end allows you to perform all CRUD operations on existing entities;
 
-Adicionais
-- [ ] Layouts e organização das telas, assim como o eventual uso de componentes/bibliotecas extras, ...
+Additional
+- [ ] Layouts and organization of screens, as well as the possible use of extra components/libraries, ...
 - [ ] Docker
-- [ ] Testes (unitários, integração)
+- [ ] Tests (unit, integration)
